@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Assignment</title>
+</head>
+<body>
+  <section id="products"></section>
+  <input type="button" id="add" value="Add New Product"> &nbsp;
+  <input type="button" id="total" value="Total Bill" style="display: none">
+  &nbsp;
+  <span id="bill" style="border: 2px solid darkred; display: none;"></span>
+  <input type="button" value="RELOAD" onclick="location.reload()" style="display: inline-block">
+  <script>
+    var i = 0;
+    document.getElementById("add").addEventListener("click",function () {
+        var total = document.getElementById("total");
+        if (total.style.display === "none") {
+            total.style.display = "inline";
+        }
+    });
+    document.getElementById("add").addEventListener("click",function addProduct() {
+        var name, cost, quan;
+        name = document.createElement("input");
+        name.setAttribute("type","text");
+        name.setAttribute("id","prod"+i);
+        name.setAttribute("placeholder","Product"+i);
+        name.style.display = "block";
+        name.style.margin = "7px";
+        name.style.padding = "6px";
+
+        cost = document.createElement("input");
+        cost.setAttribute("type","number");
+        cost.setAttribute("id","cost"+i);
+        cost.setAttribute("placeholder","Cost"+i);
+        cost.style.display = "block";
+        cost.style.margin = "7px";
+        cost.style.padding = "6px";
+        cost.min = 0;
+
+        quan = document.createElement("input");
+        quan.setAttribute("type","number");
+        quan.setAttribute("id","quan"+i);
+        quan.setAttribute("placeholder","Quantity"+i);
+        quan.style.display = "block";
+        quan.style.margin = "7px";
+        quan.style.padding = "6px";
+        quan.min = 0;
+        i++;
+        var fie = document.createElement("fieldset");
+        var leg = document.createElement("legend");
+        leg.appendChild(document.createTextNode("Product"+i+"Details"));
+        fie.appendChild(leg);
+        fie.appendChild(name);
+        fie.appendChild(cost);
+        fie.appendChild(quan);
+        var sect = document.getElementById("products");
+        sect.appendChild(fie);
+    });
+
+    document.getElementById("total").addEventListener("click",function () {
+        var cos, qua, bill = 0;
+        var fields = document.getElementsByTagName("fieldset");
+        var count = fields.length;
+        var i = 0;
+        for (i ; i < count; i++){
+            cos = document.getElementById("cost" + i);
+            qua = document.getElementById("quan" + i);
+            bill += (cos.value * qua.value);
+        }
+        document.getElementById("bill").style.display = "inline";
+        document.getElementById("bill").innerText = "Total Bill is : " + bill + "Rs.";
+    })
+  </script>
+</body>
+</html>
