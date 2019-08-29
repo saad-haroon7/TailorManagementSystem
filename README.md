@@ -1,2 +1,0 @@
-# TailorManagementSystem
-Training Project
